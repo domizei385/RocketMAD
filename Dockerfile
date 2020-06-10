@@ -12,7 +12,7 @@ EXPOSE 5000
 WORKDIR /usr/src/app
 
 # Set Entrypoint with hard-coded options
-ENTRYPOINT ["dumb-init", "-r", "15:2", "python", "./runserver.py", "--host", "0.0.0.0"]
+ENTRYPOINT ["dumb-init", "-r", "15:2", "python", "./runserver.py", "--host", "0.0.0.0", "-v"]
 
 
 COPY package.json requirements.txt Gruntfile.js static01.zip /usr/src/app/
@@ -32,4 +32,7 @@ RUN apt-get update \
  && apt-get purge -y --auto-remove build-essential git nodejs unzip
 
 # Copy everything to the working directory (Python files, templates, config) in one go.
-COPY . /usr/src/app/
+COPY . /usr/src/app
+
+# Remove samples to allow mounting config directory from outside the container
+RUN rm -rf /usr/src/app/config
