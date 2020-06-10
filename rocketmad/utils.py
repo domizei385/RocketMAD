@@ -216,7 +216,8 @@ def get_args(access_config=None):
                         help=('Show MOTD on every visit. If disabled, the '
                               'MOTD will only be shown when its title or '
                               'text has changed.'))
-    parser.add_argument('-gf', '--geofence', default=None,
+    parser.add_argument('-gf', '--geofence', default=[],
+                        nargs='+',
                         help=('Geofence - 4 double values for swLat,swLng,neLat,neLng'))
     parser.add_argument('-mzl', '--max-zoom-level', type=int,
                         help=('Maximum level a user can zoom out. '

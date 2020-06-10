@@ -714,10 +714,11 @@ def create_app():
         else:
             timestamp = 0
 
-        swLat = request.args.get('swLat')
-        swLng = request.args.get('swLng')
-        neLat = request.args.get('neLat')
-        neLng = request.args.get('neLng')
+        hasGeofence = user_args.geofence is not None and len(user_args.geofence) == 4
+        swLat = user_args.geofence[0] if hasGeofence else request.args.get('swLat')
+        swLng = user_args.geofence[1] if hasGeofence else request.args.get('swLng')
+        neLat = user_args.geofence[2] if hasGeofence else request.args.get('neLat')
+        neLng = user_args.geofence[3] if hasGeofence else request.args.get('neLng')
 
         oSwLat = request.args.get('oSwLat')
         oSwLng = request.args.get('oSwLng')

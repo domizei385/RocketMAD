@@ -18,7 +18,7 @@
 #messenger-url:                 # Messenger group invite link. (default=None)
 #telegram-url:                  # Telegram group invite link. (default=None)
 #whatsapp-url:                  # WhatsApp group invite link. (default=None)
-
+#geofence:                      # Rect shaped geofence that constrains request for data within those bounds. Rect shape takes 4 double values: [swLat, swLng, neLat, neLng]. (default=[])
 #custom-tile-servers:           # Use your own tile server(s). Accepts list of names and urls separated by ':'. Names should be unique.
                                 # Example: [tile_server_name1:tile_server_url1, tile_server_name2:tile_server_url2] (default=[])
 #max-zoom-level:                # Maximum level a user can zoom out. Range: [0,18]. 0 means the user can zoom out completely. (default=10)
