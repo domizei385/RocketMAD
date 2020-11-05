@@ -267,6 +267,10 @@ const StoreOptions = {
         default: true,
         type: StoreTypes.Boolean
     },
+    showCheckedQuests: {
+        default: true,
+        type: StoreTypes.Boolean
+    },
     filterQuests: {
         default: false,
         type: StoreTypes.Boolean
@@ -278,6 +282,10 @@ const StoreOptions = {
     excludedQuestItems: {
         default: new Set(),
         type: StoreTypes.Set
+    },
+    checkedQuests: {
+        default: [],
+        type: StoreTypes.JSON
     },
     showInvasions: {
         default: true,

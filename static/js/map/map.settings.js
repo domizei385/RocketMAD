@@ -79,6 +79,7 @@ function initSettings() {
     if (serverSettings.pokestops) {
         settings.showPokestopsNoEvent = Store.get('showPokestopsNoEvent')
         settings.showQuests = serverSettings.quests && Store.get('showQuests')
+        settings.showCheckedQuests = serverSettings.checkedQuests && Store.get('showCheckedQuests')
         settings.showInvasions = serverSettings.invasions && Store.get('showInvasions')
         settings.includedLureTypes = serverSettings.lures ? Store.get('includedLureTypes') : []
     }
@@ -86,6 +87,7 @@ function initSettings() {
         settings.filterQuests = Store.get('filterQuests')
         settings.excludedQuestPokemon = Store.get('excludedQuestPokemon')
         settings.excludedQuestItems = Store.get('excludedQuestItems')
+        settings.checkedQuests = Store.get('checkedQuests')
         settings.questNotifs = Store.get('questNotifs')
         settings.notifQuestPokemon = Store.get('notifQuestPokemon')
         settings.notifQuestItems = Store.get('notifQuestItems')

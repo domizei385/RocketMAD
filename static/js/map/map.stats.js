@@ -429,6 +429,7 @@ function updateStatsTable() {
     if (selectedTab === '#pokestop-stats-tab') {
         let noStatusCount = 0
         let questCount = 0
+        let checkedCount = 0
         let invasionCount = 0
         let normalLureCount = 0
         let glacialLureCount = 0
@@ -441,6 +442,10 @@ function updateStatsTable() {
             if (mapBounds.contains(location)) {
                 pokestopCount++
                 let hasStatus = false
+                if (isPokestopMeetsCheckedQuestFilters(pokestop)) {
+                    checkedCount++
+                    hasStatus = true
+                }
                 if (isPokestopMeetsQuestFilters(pokestop)) {
                     questCount++
                     hasStatus = true
@@ -490,6 +495,16 @@ function updateStatsTable() {
                     i18n('Quest'),
                     questCount,
                     (questCount * 100) / pokestopCount
+                ]
+            )
+        }
+        if (checkedCount > 0) {
+            pokestopRows.push(
+                [
+                    '<img src="static/images/pokestop/stop_q.png" width=32 />',
+                    i18n('Checked'),
+                    checkedCount,
+                    (checkedCount * 100) / pokestopCount
                 ]
             )
         }

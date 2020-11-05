@@ -9,6 +9,18 @@ filterManagers
 */
 /* exported processPokestop */
 
+function isPokestopMeetsCheckedQuestFilters(pokestop) {
+    if (!settings.showQuests || !pokestop.quest) {
+        return false
+    }
+    if (settings.filterQuests) {
+        if (!settings.showCheckedQuests && settings.checkedQuests.has(pokestop.pokestop_id)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function isPokestopMeetsQuestFilters(pokestop) {
     if (!settings.showQuests || !pokestop.quest) {
         return false
@@ -69,8 +81,9 @@ function isPokestopMeetsFilters(pokestop) {
         }
     }
 
-    return settings.showPokestopsNoEvent || isPokestopMeetsQuestFilters(pokestop) ||
-        isPokestopMeetsInvasionFilters(pokestop) || isPokestopMeetsLureFilters(pokestop)
+    return settings.showPokestopsNoEvent || isPokestopMeetsCheckedQuestFilters(pokestop) ||
+        isPokestopMeetsQuestFilters(pokestop) || isPokestopMeetsInvasionFilters(pokestop) ||
+        isPokestopMeetsLureFilters(pokestop)
 }
 
 function isPokestopRangesActive() {
@@ -183,6 +196,7 @@ function pokestopLabel(pokestop) {
         let isNotifQuest
         let notifFunction
         let excludeFunction
+        let checkFunction = `checkQuest(${pokestop.pokestop_id})`
         let infoButtonDisplay = ''
 
         switch (quest.reward_type) {
@@ -245,6 +259,7 @@ function pokestopLabel(pokestop) {
                 <div>
                   <a href='javascript:${notifFunction}' class='link-button' title="${notifText}"><i class="${notifIconClass}"></i></a>
                   <a href='javascript:${excludeFunction}' class='link-button' title=${i18n('Hide')}><i class="fas fa-eye-slash"></i></a>
+                  <a href='javascript:${checkFunction}' class='link-button' title=${i18n('Check')}><i class="fas fa-eye-slash"></i></a>
                   ${infoButtonDisplay}
                 </div>
               </div>
@@ -521,6 +536,13 @@ function excludeQuestPokemon(id) { // eslint-disable-line no-unused-vars
 function excludeQuestItem(id, bundle) { // eslint-disable-line no-unused-vars
     if (filterManagers.excludedQuestItems !== null) {
         filterManagers.excludedQuestItems.add([id + '_' + bundle])
+    }
+}
+
+function checkQuest(id) { // eslint-disable-line no-unused-vars
+    if (!settings.checkedQuests.includes(id)) {
+        settings.checkedQuests.append(id);
+        updatePokestop(pokestop);
     }
 }
 
